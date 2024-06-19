@@ -1,0 +1,21 @@
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.border-blur {
+    border: 2px solid lightgrey;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+.form-inline .form-control {
+    flex: 1;
+}
+.form-inline label {
+    margin-right: 10px;
+}

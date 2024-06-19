@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name = "viewport" content="width=device-width, initial-scale=1">
+        <title> Some page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="stylesheet.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script> 
+
+    </head>
+    <body>
+        <div class="container p-2 m-4">
+            <h1 class="section-title">SĄSKAITA FAKTŪRA</h1>
+            <form class="row g-3" id="dataForm">
+                <div class="row border-blur" id="SellersInformation">
+                    <h2>Pardavėjo informacija</h2>
+                    <div class="col-md-6">
+                        <label for="inputSelersName" class="form-label">Pavadinimas / Vardas Pavardė</label>
+                        <input type="text" class="form-control" id="inputSelersName" data-bs-toggle="tooltip" data-bs-placement="top" title="Pardavėjo Pavadinimas/Vardas Pavarė">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inpuSelersRegistrationNr" class="form-label">Įreg. Nr</label>
+                        <input type="text" class="form-control" id="inpuSelersRegistrationNr" data-bs-toggle="tooltip" data-bs-placement="top" title="Pardavėjo veiklos registracijos numeris">
+                    </div>
+                    <div class="col-6">
+                        <label for="inputSelersAddress" class="form-label">Adresas</label>
+                        <input type="text" class="form-control" id="inputSelersAddress" data-bs-toggle="tooltip" data-bs-placement="top" title="Pardavėjo adresas">
+                    </div>
+                    <div class="col-6">
+                        <label for="inputSelersCode" class="form-label">Kodas</label>
+                        <input type="text" class="form-control" id="inputSelersCode" data-bs-toggle="tooltip" data-bs-placement="top" title="Pardavėjo kodas">
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-6">
+                            <label for="inputSelersAk" class="form-label">A/k</label>
+                            <input type="text" class="form-control" id="inputSelersAk" data-bs-toggle="tooltip" data-bs-placement="top" title="Asmens kodas"> 
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">Bankas</label>
+                        <select id="inputState" class="form-select">
+                            <option selected></option>
+                            <option>AB DNB</option>
+                            <option>AB Swedbank</option>
+                            <option>AB SEB</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputSelersAs" class="form-label">A/s</label>
+                        <input type="text" class="form-control" id="inputSelersAs" data-bs-toggle="tooltip" data-bs-placement="top" title="Pardavėjo atsiskaitomoji saskaita">
+                    </div>
+                </div>
+                <div class="row border-blur">
+                    <h2>Pirkėjo informacija</h2>
+                    <div class="col-md-6">
+                        <label for="inpuBuyersName" class="form-label">Pavadinimas / Vargas, Pavardė</label>
+                        <input type="text" class="form-control" id="inpuBuyersName" data-bs-toggle="tooltip" data-bs-placement="top" title="Pirkėjo Pavadinimas / Vardas Pavardė">
+                    </div>
+                    <div class="col-6">
+                        <label for="inputAddress" class="form-label">Adresas</label>
+                        <input type="text" class="form-control" id="inputAddress" data-bs-toggle="tooltip" data-bs-placement="top" title="Pirkėjo adresas">
+                    </div>
+                    <div class="col-6">
+                        <label for="inputBuyersCode" class="form-label">Kodas / asmens kodas</label>
+                        <input type="text" class="form-control" id="inputBuyersCode" data-bs-toggle="tooltip" data-bs-placement="top" title="Pirkėjo asmens koas">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputBuyersPVMcode" class="form-label">PVM mokėtojo kodas</label>
+                        <input type="text" class="form-control" id="inputBuyersPVMcode" data-bs-toggle="tooltip" data-bs-placement="top" title="Pirkėjo PVM mokėtojo koas">
+                    </div>
+                </div>
+                <div class="container m-2">
+                    <table class="table table-bordered" id="productTable">
+                        <thead>
+                            <tr>
+                                <th scope="col-1" class="itemNr">#</th>
+                                <th scope="col-5" class="itemName">Prekė</th>
+                                <th scope="col-1" class="itemUnit">Mato vnt</th>
+                                <th scope="col-1" class="itemNameQuantity">Kiekis</th>
+                                <th scope="col-2" class="ItemPrice">Kaina</th>
+                                <th scope="col-2" class="ItemTotalPrice">Suma</th>
+                                <th scope="col-1">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td><input type="text" class="form-control"></td>
+                                <td><input type="text" class="form-control"></td>
+                                <td><input type="number" class="form-control quantity"></td>
+                                <td><input type="number" class="form-control price"></td>
+                                <td class="total-price"></td>
+                                <td><button type="button" class="btn btn-danger remove-row"><i class="bi bi-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" style="text-align: right;">Iš viso: </td>
+                                <td id="grand-total"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <button type="button" class="btn btn-secondary" id="addRow">Add Row</button>
+                </div>
+                <div class="container">
+                    <!-- Series Number and Date Input Fields in one line -->
+                    <div class="mb-3 form-inline">
+                        <label for="seriesLetters" class="form-label">Serijos Nr:</label>
+                        <div class="col-1 m-1">
+                            <input type="text" class="form-control col-1 m-1" id="seriesLetters" maxlength="3" data-bs-toggle="tooltip" data-bs-placement="top" title="3 saskaitos fakturos serijos raidės">
+                        </div>
+                        <div class="col-1 m-1">
+                            <input type="text" class="form-control col-1 m-1" id="seriesNumber" maxlength="3" data-bs-toggle="tooltip" data-bs-placement="top" title="3 sąskaitos fakturos serijos skaičiai">
+                        </div>
+                        
+                        <label for="datepicker" class="form-label m-1">Data:</label>
+                        <div class="col-1 m-1">
+                            <input type="text" class="form-control col-1 m-1" id="datepicker" autocomplete="off" data-bs-toggle="tooltip" data-bs-placement="top" title="Saskaitos fakturos data">
+                        </div>
+                        
+                    </div>
+                </div>
+                <div>
+                    <label for="imageInput" class="btn btn-primary m-2">Įkelti logotipą</label>
+                    <input type="file" id="imageInput" accept="image/*" style="display: none;">
+                    <div id="imageContainer" class="position-relative mt-2" style="display: none; max-width: 100px;">
+                        <img id="logoPreview" src="#" alt="Logo Preview" class="img-thumbnail">
+                        <button id="deleteImageBtn" class="btn btn-danger btn-sm position-absolute top-0 end-0" style="background: transparent; border: none;">
+                            <i class="bi bi-trash" style="font-size: 1.2rem; color: rgb(255, 0, 0);"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <button class="btn btn-primary m-2" type="button" id="additionalInformationBTN">
+                        Papildoma informacija
+                    </button>
+                    <div class="form-floating" style="display: none;" id="additionalInfo">
+                        <textarea class="form-control p-1" id="additionalInformation"></textarea>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-md-6">
+                        <label for="inputSelerInvoiceSigne" class="form-label">Saskaita išrašė</label>
+                        <input type="text" class="form-control" id="inputSelerInvoiceSigne" data-bs-toggle="tooltip" data-bs-placement="top" title="Asmens išrašiusio saskaita faktūra vardas ir pavardė">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputBuyersInvoiceSigne" class="form-label">Prekes gavo</label>
+                        <input type="text" class="form-control" id="inputBuyersInvoiceSigne" data-bs-toggle="tooltip" data-bs-placement="top" title="Asmuo priėmes sąskaitą faktūrą">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="button" class="btn btn-primary" id="generate-pdf">Generuoti sąskaitą faktūrą</button>
+                </div>
+            </form>
+        </div>
+        <div id="modalContainer"></div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        <script src='script.js'></script>
+        <script src='PDF.js'></script>
+    </body>
+</html>
